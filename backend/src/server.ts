@@ -1,7 +1,7 @@
+import { env } from "./config/env";
+import { logger } from "./logger/logger";
 import app from "./app";
 
-const PORT = 3000;
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+app.listen(env.port, () => {
+  logger.info(`API running on port ${env.port}`);
 });

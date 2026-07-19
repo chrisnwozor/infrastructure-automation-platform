@@ -1,16 +1,18 @@
+import cors from "cors";
 import express from "express";
+import helmet from "helmet";
+
+import { errorHandler } from "./middleware/error.middleware";
+import routes from "./routes";
 
 const app = express();
 
-// Middleware
+app.use(helmet());
+app.use(cors());
 app.use(express.json());
 
-// Health Check Route
-app.get("/health", (req, res) => {
-  res.status(200).json({
-    status: "OK",
-    message: "Infrastructure Automation Platform API is running",
-  });
-});
+app.use("/api/v1", routes);
+
+app.use(errorHandler);
 
 export default app;
