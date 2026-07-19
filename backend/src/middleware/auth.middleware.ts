@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-
+import { env } from "../config/env";
 import { AppError } from "../utils/app-error";
 
 type JwtPayload = {
@@ -19,7 +19,7 @@ export const authenticate = (
   }
 
   const token = authorization.split(" ")[1];
-  const secret = process.env.JWT_SECRET;
+  const secret = env.jwtSecret;
 
   if (!secret) {
     throw new Error("JWT_SECRET is not configured");
